@@ -1,0 +1,14 @@
+language: ruby
+
+env:
+  - COCOAPODS_BRANCH=master
+  - COCOAPODS_BRANCH=fix-deployment-diff
+
+before_script:
+  - mkdir -p ~/.cocoapods/repos
+  - git clone --depth 1 --branch master --single-branch https://github.com/CocoaPods/Specs.git ~/.cocoapods/repos/master
+  - echo "COCOAPODS_BRANCH=$COCOAPODS_BRANCH"
+  - bundle install
+
+script:
+  - bundle exec pod install --deployment
